@@ -1,8 +1,11 @@
 import React from 'react';
 import Topbar from '../../components/Topbar/Topbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Feed from '../../components/Feed/Feed';
+import Rightbar from '../../components/Rightbar/Rightbar';
+import './profile.css';
 
-const ProfilePage = () => {
+const Profile = () => {
     return (
         <>
           <Topbar />
@@ -13,28 +16,33 @@ const ProfilePage = () => {
                     <div className="profileCover">
                         <img
                             className="profileCoverImg"
-                            src="assets/post/3.jpeg"
+                            src="assets/People/3.jpeg"
                             alt=""
                         />
                         <img 
                             className="profileUserImg"
-                            src="assets/person/4.jpeg"
+                            src="assets/People/4.jpeg"
                         />
                     </div>
 
                     <div className="profileInfo">
-                        <h4 className="profileInfo">
-                            John
+                        <h4 className="profileInfoName">
+                            Ankita
                         </h4>
                         <span className="profileInfoDesc">
-                            Hello my friends!
+                            Always a learner!
                         </span>
                     </div>
                 </div>
+                <div className="profileRightBottom">
+                    <Feed />
+                    <Rightbar/>
+                </div>
             </div>
+            
           </div>
         </>
     );
 };
 
-export default ProfilePage;
+export default Profile;
