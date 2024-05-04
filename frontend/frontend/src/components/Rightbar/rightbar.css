@@ -1,0 +1,49 @@
+.rightbar {
+    flex: 3;
+    background-color: whitesmoke
+}
+
+.rightbarWrapper {
+    padding: 20px 20px 0 0;
+}
+  
+.birthdayContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.birthdayImg {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.friendListOnline {
+    padding: 0px;
+    margin: 0;
+    list-style: none;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.titleText {
+    color: black;
+    font-weight: 300px;
+}
+  
+.birthdayText {
+    font-weight: 300;
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.rightBarHr {
+    margin: 20px 0;
+}
