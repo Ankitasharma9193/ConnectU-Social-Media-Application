@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "./feed.css";
 import Share from "../Share/Share";
 import Post from "../Post/Post";
-import { Posts } from "../../dummyData"
+import axios from "axios"; 
+import { AuthContext } from '../../context/AuthContext';
 
-function Feed() {
+function Feed({ username }) {
+  const [Posts, setPosts] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const result = username
+      ? await axios.get("/posts/profile/" + username)
+      : await axios.get("/posts/timeline/" + user._id)
+      console.log('~~~~~~~~~~~~~~~~`>',result, username)
+      setPosts(
+        // we need data sorted in chronological order, newest post at first
+        result.data.sort((p1,p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt)
+        })
+      )
+    };
+    fetchPosts();
+  }, [username, user._id]);
+
   return (
     <div className='feed'>
         <div className='feedWrapper'>
-            <Share />
+            {(!username || username === user.username) && <Share /> }
             {
               Posts.map((post) => (
-                <Post key={post.id} post={post} />
+                <Post key={post._id} post={post} />
               ))
             }
         </div>

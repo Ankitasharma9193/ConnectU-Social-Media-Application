@@ -1,10 +1,10 @@
-.rightbar {
+.rightBarApp {
     flex: 3;
     background-color: whitesmoke
 }
 
-.rightbarWrapper {
-    padding: 20px 20px 0 0;
+.rightbarAppContainer {
+    padding: 20px;
 }
   
 .birthdayContainer {
@@ -36,6 +36,7 @@
 .titleText {
     color: black;
     font-weight: 300px;
+    margin-bottom: 10px;
 }
   
 .birthdayText {
@@ -46,4 +47,44 @@
 
 .rightBarHr {
     margin: 20px 0;
+}
+
+.rightBarInfo {
+    margin: 10px;
+}
+
+.infoItem {
+    margin-bottom: 10px;
+}
+
+.profileBarFollowingImg {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 7px;
+}
+
+.profileBarFollowings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.profileBarFollowing {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.rightBarFollowButton {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    background-color: green;
 }

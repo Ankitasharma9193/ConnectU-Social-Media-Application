@@ -55,7 +55,7 @@ router.get("/:id", async (req, res) => {
 
 // FOLLOW USER
 router.put("/:id/follow", async (req, res) => {
-    if(req.body.userId === req.params.id || req.body.isAdmin){
+    if(req.body.userId !== req.params.id || req.body.isAdmin){
         const userToFollow = req.params.id
         const userWantToFollow = req.body.userId
         try {
@@ -63,7 +63,7 @@ router.put("/:id/follow", async (req, res) => {
             const currentUser = await UserModel.findById(userWantToFollow) // user id
             if(!user.followers.includes(userWantToFollow)){
                 await user.updateOne({$push: {followers: userWantToFollow} });
-                await currentUser.updateOne({$push: {following: userToFollow} });
+                await currentUser.updateOne({$push: {followings: userToFollow} });
                 res.status(200).json(`You are now following ${user?.username}`);
             } else {
                 res.status(403).json("You already follow this user");
@@ -78,7 +78,7 @@ router.put("/:id/follow", async (req, res) => {
 
 //UNFOLLOW USER
 router.put(":id/unfollow", async (req, res) => {
-    if(req.body.userId === req.params.id || req.body.isAdmin) {
+    if(req.body.userId !== req.params.id) {
         const userToFollow = req.params.id
         const userWantToFollow = req.body.userId
         try {
@@ -86,7 +86,7 @@ router.put(":id/unfollow", async (req, res) => {
             const currentUser = await UserModel.findById(userWantToFollow);
             if(user.followers.includes(userWantToFollow)) {
                 await user.updateOne({ $pull: {followers: userWantToFollow} })
-                await currentUser.updateOne({ $pull: {following: userToFollow} })
+                await currentUser.updateOne({ $pull: {followings: userToFollow} })
                 res.status(200).json(`You are no longer following ${user?.username}`);
             } else {
                 res.status(403).json("You are not following this user");
