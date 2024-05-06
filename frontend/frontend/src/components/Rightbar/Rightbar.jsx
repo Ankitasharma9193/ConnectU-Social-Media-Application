@@ -12,6 +12,7 @@ function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
+    // is the user in the following list of current user(user in the context API)?
     currentUser.followings.includes(user?.id)
   );
   
@@ -23,7 +24,10 @@ function Rightbar({ user }) {
       });
       dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
-
+        await axios.put(`/users/${user._id}/follow`, {
+          userId: currentUser._id,
+        });
+        dispatch({ type: "FOLLOW", payload: user._id });
       }
       setFollowed(!followed);
     } catch (err) {
@@ -34,7 +38,7 @@ function Rightbar({ user }) {
   useEffect(() => {
     const getUserFriend = async () => {
       try {
-        const friendList = axios.get("users/friends"+ user?._id)
+        const friendList = axios.get("users/friends/"+ user?._id)
         setFriends(friendList.data);
       } catch (err) {
         console.log('Error while fetching friends.....',err);
@@ -42,7 +46,7 @@ function Rightbar({ user }) {
     }
     getUserFriend();
   }, [user])
-
+  console.log('!!!!!!!!!!!!!!!!', friends);
   const HomeRightBar = () => {
     return (
       <div>
@@ -57,8 +61,8 @@ function Rightbar({ user }) {
           <span className="titleText">Online </span>
         </div>
         <ul className='friendListOnline'>
-            {Users.map((user) => (
-              <Online user= {user}/>
+            {friends.map((friend) => (
+              <Online friend= {friend}/>
             ))}
         </ul>
       </div>

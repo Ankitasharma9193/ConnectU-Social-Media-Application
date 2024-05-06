@@ -41,17 +41,47 @@ router.delete("/:id", async (req, res) => {
 });
 
 // GET USER ACCOUNT
-router.get("/:id", async (req, res) => {
-    if(req.body.userId === req.params.id || req.body.isAdmin){
-        try{
-            const user = await UserModel.findById(req.params.id);
-            const {password, updatedAt, ...other} = user._doc;
-            res.status(200).json(user);
-        } catch(err) {
-            return res.status(500).json(err);
-        }
+router.get("/", async (req, res) => {
+//    console.log('in req object',req)
+    const userName = req.query.username;
+    const userId = req.query.userId;
+
+    console.log('in the get user', userName, userId)
+    try{
+        const user = userId
+         ? await UserModel.findById(userId)
+         : await UserModel.findOne({ username: userName });
+        console.log('~~~~~~~~>user data',user);
+        const { password, updatedAt, ...other } = user._doc;
+        console.log('~~~~~~~~~~~~~~~',other)
+        res.status(200).json(other);
+    } catch (err) {
+        return res.status(500).json(err)
     }
 });
+
+
+
+// GET ALL FRIENDS OF USER
+router.get("/friends/:userId", async (req, res) => {
+    console.log('friend list~~~~', req.params.userId);
+    try {
+      const user = await UserModel.findById(req.params.userId);
+      const friends = await Promise.all(
+        user.followings.map((friendId) => {
+          return UserModel.findById(friendId);
+        })
+      );
+      let friendList = [];
+      friends.map((friend) => {
+        const { _id, username, profilePicture } = friend;
+        friendList.push({ _id, username, profilePicture });
+      });
+      res.status(200).json(friendList)
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 // FOLLOW USER
 router.put("/:id/follow", async (req, res) => {

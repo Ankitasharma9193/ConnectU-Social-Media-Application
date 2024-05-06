@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from '../../context/AuthContext';
 
 function Feed({ username }) {
+  console.log('~ username', username);
   const [Posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
@@ -14,7 +15,6 @@ function Feed({ username }) {
       const result = username
       ? await axios.get("/posts/profile/" + username)
       : await axios.get("/posts/timeline/" + user._id)
-      console.log('~~~~~~~~~~~~~~~~`>',result, username)
       setPosts(
         // we need data sorted in chronological order, newest post at first
         result.data.sort((p1,p2) => {
@@ -22,8 +22,11 @@ function Feed({ username }) {
         })
       )
     };
+
     fetchPosts();
   }, [username, user._id]);
+
+  console.log('all posts ~~~~~~~`',Posts);
 
   return (
     <div className='feed'>

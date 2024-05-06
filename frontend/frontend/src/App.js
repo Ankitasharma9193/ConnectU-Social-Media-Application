@@ -21,7 +21,7 @@ function App() {
         <Route exact path="/" element={
           user ? <Home /> : <Register />} />
 
-        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/:userName" element={<Profile />} />
 
         <Route path="/login" element={
           user ? <Navigate to="/" /> : <Login />} />
