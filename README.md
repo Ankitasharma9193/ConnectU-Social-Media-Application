@@ -91,109 +91,109 @@ Backend API
     
 2) Posts API
    
-    Create Post
+      Create Post
    
-      Description: Create a new post.
-     
-      Method: POST
-     
-      Endpoint: /posts
-     
-      Request Body: Post content (image, description).
-     
-      Response: Returns the created post.
+          Description: Create a new post.
+         
+          Method: POST
+         
+          Endpoint: /posts
+         
+          Request Body: Post content (image, description).
+         
+          Response: Returns the created post.
    
-    Get Post
+      Get Post
    
-      Description: Retrieve a specific post.
-     
-      Method: GET
-     
-      Endpoint: /posts/{post_id}
-     
-      Response: Returns post details.
+          Description: Retrieve a specific post.
+         
+          Method: GET
+         
+          Endpoint: /posts/{post_id}
+         
+          Response: Returns post details.
    
-    Update Post
+      Update Post
    
-      Description: Update an existing post.
-     
-      Method: PUT
-     
-      Endpoint: /posts/{post_id}
-     
-      Request Body: Updated post content.
-     
-      Response: Returns updated post details.
+          Description: Update an existing post.
+         
+          Method: PUT
+         
+          Endpoint: /posts/{post_id}
+         
+          Request Body: Updated post content.
+         
+          Response: Returns updated post details.
    
-    Delete Post
+      Delete Post
+       
+          Description: Delete a post.
+         
+          Method: DELETE
+         
+          Endpoint: /posts/{post_id}
+         
+          Response: Returns success message upon deletion.
    
-      Description: Delete a post.
-     
-      Method: DELETE
-     
-      Endpoint: /posts/{post_id}
-     
-      Response: Returns success message upon deletion.
+      Get Timeline
    
-    Get Timeline
+          Description: Retrieve posts for the user's timeline.
+         
+          Method: GET
+         
+          Endpoint: /posts/timeline
+         
+          Response: Returns posts relevant to the user's timeline.
    
-      Description: Retrieve posts for the user's timeline.
-     
-      Method: GET
-     
-      Endpoint: /posts/timeline
-     
-      Response: Returns posts relevant to the user's timeline.
+       Get Profile Posts
    
-    Get Profile Posts
-   
-      Description: Retrieve posts related to a specific user's profile.
-     
-      Method: GET
-     
-      Endpoint: /posts/profile/{user_id}
-     
-      Response: Returns posts associated with the specified user's profile.
+          Description: Retrieve posts related to a specific user's profile.
+         
+          Method: GET
+         
+          Endpoint: /posts/profile/{user_id}
+         
+          Response: Returns posts associated with the specified user's profile.
    
 3) Auth API
        
-      User Login
+        User Login
    
-        Description: Authenticate user login credentials.
-     
-        Method: POST
-     
-        Endpoint: /auth/login
-     
-        Request Body: User credentials (username, password).
-     
-        Response: Returns authentication token upon successful login.
+          Description: Authenticate user login credentials.
+       
+          Method: POST
+       
+          Endpoint: /auth/login
+       
+          Request Body: User credentials (username, password).
+       
+          Response: Returns authentication token upon successful login.
    
-      User Registration
+        User Registration
    
-        Description: Register a new user.
-     
-        Method: POST
-     
-        Endpoint: /auth/register
-     
-        Request Body: New user details (username, email, password).
-     
-        Response: Returns success message upon successful registration.
+          Description: Register a new user.
+       
+          Method: POST
+       
+          Endpoint: /auth/register
+       
+          Request Body: New user details (username, email, password).
+       
+          Response: Returns success message upon successful registration.
    
   4) Post/Upload API
        
         Post Image with Description
   
-        Description: Upload an image with accompanying description as a post.
-     
-        Method: POST
-     
-        Endpoint: /post/upload
-     
-        Request Body: Image file and post description.
-     
-        Response: Returns the created post with uploaded image.
+          Description: Upload an image with accompanying description as a post.
+       
+          Method: POST
+       
+          Endpoint: /post/upload
+       
+          Request Body: Image file and post description.
+       
+          Response: Returns the created post with uploaded image.
 
 Database Model
 
