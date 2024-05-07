@@ -89,6 +89,42 @@ Backend API
 
     Response: Returns a list of friends for the specified user.
     
+  Follow User
+  
+      Endpoint: /users/:id/follow
+      
+      Method: PUT
+      
+      Description: Allows a user to follow another user.
+      
+      Request Body:
+      
+      userId: ID of the user performing the follow action.
+      
+      Response:
+      
+      If successful, returns a message confirming the follow action.
+      If the user is already following the target user, returns a 403 Forbidden error.
+      If an error occurs, returns a 500 Internal Server Error.
+      
+  Unfollow User
+  
+      Endpoint: /users/:id/unfollow
+      
+      Method: PUT
+      
+      Description: Allows a user to unfollow another user.
+      
+      Request Body:
+      
+      userId: ID of the user performing the unfollow action.
+      
+      Response:
+      If successful, returns a message confirming the unfollow action.
+      If the user is not currently following the target user, returns a 403 Forbidden error.
+      If an error occurs, returns a 500 Internal Server Error.
+
+    
 2) Posts API
    
       Create Post
