@@ -22,13 +22,13 @@ mongoose.connect(process.env.MONGO_URL)
     console.error('Error connecting to MongoDB:', error);
 });
 
+// whenever encounter /images, go to directory public/images
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   next();
 });
-
-// whenever encounter /images, go to directory public/images
-app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //middleware
 app.use(express.json());
@@ -40,13 +40,12 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, req.body.name);
   },
 });
 
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  console.log('!!!!!!!!!! UPLOADING');
   try {
     return res.status(200).json("File uploded successfully");
   } catch (error) {

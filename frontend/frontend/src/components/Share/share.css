@@ -24,10 +24,8 @@
 }
 
 .shareInput {
-    width: 100%;
-    border-color: black;
-    outline: none;
-    padding: 5px;
+    border: none;
+  width: 80%;
 }
 
 .shareInput:focus {
@@ -37,7 +35,6 @@
 .shareOptions {
     display: flex;
     margin-left: 20px;
-    justify-content: space-around;
 }
 
 .shareOption {
@@ -77,3 +74,22 @@
     cursor: pointer;
     color: white;
 }
+
+.shareImgContainer{
+    padding: 0 20px 10px 20px;
+    position: relative;
+    background-color: black;
+  }
+  
+.shareImg{
+    width: 100%;
+    object-fit: cover;
+}
+  
+.shareCancelImg{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+  }

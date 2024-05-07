@@ -27,7 +27,7 @@ export default function Share() {
     if(file){
         const data = new FormData();
         // we need file name to be date + name to keep it unique
-        const fileName = Date.now() + file.name;
+        const fileName = file.name;
         data.append("name", fileName);
         // append file to data
         data.append("file", file);

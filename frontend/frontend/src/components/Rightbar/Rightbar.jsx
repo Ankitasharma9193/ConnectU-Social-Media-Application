@@ -24,7 +24,7 @@ function Rightbar({ user }) {
   // useEffect(() => {
   //   const getUserFriend = async () => {
   //     try {
-  //       const friendList = axios.get("users/friends/"+ user?._id)
+  //       const friendList = axios.get("/users/friends/"+ user?._id)
   //       setFriends(friendList.data);
   //     } catch (err) {
   //       console.log('Error while fetching friends.....',err);
