@@ -199,19 +199,40 @@ Database Model
 
 1) User
    
-    Description: The User model represents individuals registered in the system. Each user has a unique identifier, along with associated information such as username, email,   password (encrypted), and any other relevant profile details.Attributes:
+     Description
    
-    id: Unique identifier for each user.
+        The User model defines the structure and attributes of users registered within the system. It encompasses various details about users, including their authentication credentials, profile information, social connections, and personal preferences.
+
+    Attributes
+        username: Unique username of the user, required, and constrained to be between 6 to 30 characters in length.
    
-    username: User's unique username.
+        email: Email address of the user, constrained to a maximum length of 50 characters, and must be unique.
    
-    email: User's email address.
+        password: Encrypted password for user authentication, required, and must be at least 6 characters in length.
    
-    password: Encrypted password for user authentication.
+        profilePicture: URL of the user's profile picture, defaults to an empty string.
    
-    Additional attributes: Any other profile information like name, bio, profile picture, etc.
+        coverPicture: URL of the user's cover picture, defaults to an empty string.
    
-2) Post
+        followers: Array containing IDs of users who follow the current user, defaults to an empty array.
+   
+        followings: Array containing IDs of users whom the current user follows, defaults to an empty array.
+   
+        isAdmin: Boolean flag indicating whether the user has administrative privileges, defaults to false.
+   
+        desc: Short description or bio of the user, constrained to a maximum length of 50 characters.
+   
+        city: City where the user resides, constrained to a maximum length of 50 characters.
+   
+        from: Origin or place of origin of the user, constrained to a maximum length of 50 characters.
+   
+        birth: Date of birth of the user, defaults to an empty string.
+   
+        Additional Information
+   
+        timestamps: Automatic inclusion of createdAt and updatedAt timestamps for user creation and updates respectively, facilitated by setting { timestamps: true } option in the schema.
+   
+3) Post
     
     Description: The Post model represents individual posts created by users within the system. Each post contains content such as text, images, or multimedia along with metadata like creation timestamp, author (user who created the post), and any additional details.Attributes:
    
