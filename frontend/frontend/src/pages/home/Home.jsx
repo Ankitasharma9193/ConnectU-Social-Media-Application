@@ -12,7 +12,6 @@ const Home = () => {
          <div className="homeContainer">
             <Sidebar />
             <Feed />
-            <Rightbar />
          </div>
       </>
   );

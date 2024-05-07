@@ -60,12 +60,12 @@ function Sidebar() {
             </ul>
             <button className='sidebarButton'>Show More</button>
             <hr className="sidebarHr" />
-            <ul className="sidebarFriendList">
+            {/* <ul className="sidebarFriendList">
             {
                 Users.map((user) => (
                     <CloseFriend key={user.id} user={user} />
             ))}
-            </ul>
+            </ul> */}
         </div>
     </div>
   )

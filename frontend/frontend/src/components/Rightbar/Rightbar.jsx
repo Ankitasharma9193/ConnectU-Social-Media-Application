@@ -1,5 +1,4 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
 import Online from "../Online/Online";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -8,11 +7,9 @@ import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
 
 function Rightbar({ user }) {
-  console.log('in the right bar', user)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  console.log('CURRENT USER:', currentUser);
   const [followed, setFollowed] = useState(false);
 
   useEffect(() => {
@@ -20,14 +17,11 @@ function Rightbar({ user }) {
     setFollowed(followInitial)
   })
 
-  console.log('FOLLOWED:', followed);
   useEffect(() => {
     const getUserFriend = async () => {
       try {
         const friendList = await axios.get("/users/friends/"+ user?._id)
         setFriends(friendList.data);
-        console.log('all the friends in front end', friendList.data)
-
       } catch (err) {
         console.log('Error while fetching friends.....',err);
       }
@@ -38,7 +32,6 @@ function Rightbar({ user }) {
   const handleClick = async () => {
     try {
       if (followed) {
-        console.log('going to unfollow')
         await axios.put(`/users/${user._id}/unfollow`, {
           userId: currentUser._id
       });
@@ -68,11 +61,14 @@ function Rightbar({ user }) {
         <div className='title'>
           <span className="titleText">Online </span>
         </div>
-         <ul className='friendListOnline'>
-            {friends.map((friend) => (
-              <Online friend= {friend}/>
-            ))}
-        </ul>
+        {/* <ul className='friendListOnline'>
+            {
+              friends.map(friend => (
+                <Online key={friend._id} friend={friend} />
+                // <Online key={friend._id} friend={friend} />
+              ))
+            }
+        </ul> */}
       </div>
     )
   };
@@ -124,7 +120,6 @@ function Rightbar({ user }) {
                 <span className="profileBarFollowingName">{friend.username}</span>
               </div>
            </Link>
-
           ))}
         </div>
       </>

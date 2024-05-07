@@ -26,8 +26,6 @@ function Feed({ username }) {
     fetchPosts();
   }, [username, user._id]);
 
-  console.log('all posts ~~~~~~~`',Posts);
-
   return (
     <div className='feed'>
         <div className='feedWrapper'>

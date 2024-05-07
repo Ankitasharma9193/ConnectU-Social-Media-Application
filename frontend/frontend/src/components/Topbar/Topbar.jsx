@@ -3,6 +3,7 @@ import { Search, Person, Chat, Notifications } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { NO_AVATAR_PIC } from "../../constants";
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
@@ -49,7 +50,7 @@ export default function Topbar() {
                         src={
                         user.profilePicture
                             ? PF + user.profilePicture
-                            : PF + "person/1.jpeg"
+                            : PF + NO_AVATAR_PIC
                         }
                         alt=""
                         className="topbarImg"

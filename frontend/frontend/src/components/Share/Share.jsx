@@ -9,6 +9,7 @@ import { PermMedia,
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { NO_AVATAR_PIC } from '../../constants';
 
 export default function Share() {
  const { user } = useContext(AuthContext);
@@ -24,7 +25,7 @@ export default function Share() {
     };
 
     // if there is file/image uploaded
-    if(file){
+    if (file){
         const data = new FormData();
         // we need file name to be date + name to keep it unique
         const fileName = file.name;
@@ -33,7 +34,6 @@ export default function Share() {
         data.append("file", file);
         // upload image to post
         newPost.img = fileName
-        console.log('newPost:', newPost);
         // upload file to server
         try{
             await axios.post("/upload", data);
@@ -58,8 +58,8 @@ export default function Share() {
                 <img className='shareProfileImage'
                  src= {
                     user.profilePicture
-                     ? PF + user.profilePicture
-                     : PF + "person/1.jpeg"
+                     ? PF + user?.profilePicture
+                     : PF + NO_AVATAR_PIC
                  }
                  alt='' 
                 />

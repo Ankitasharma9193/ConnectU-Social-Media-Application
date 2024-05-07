@@ -2,16 +2,19 @@ import "./post.css";
 import { MoreVert } from "@mui/icons-material";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-// import timeago from 'timeago.js';
+import TimeAgo from 'javascript-time-ago';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import en from 'javascript-time-ago/locale/en';
 
 export default function Post({ post }) {
-  // console.log(post);
   const [like, setLike] = useState(post.likes.length)
   const [likeStatus, setLikeStatus] = useState(false);
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  
+  TimeAgo.addLocale(en);
+  const timeAgo = new TimeAgo('en-US');
   // current user (primary/profile owner)
   const { user: currentUser } = useContext(AuthContext);
   // fetch user data of each user in the post array
@@ -56,7 +59,7 @@ export default function Post({ post }) {
             <span className="postUsername">
               {user?.username}
             </span>
-            <span className='postDate'> {post?.createdAt} </span>
+            <span className='postDate'> {timeAgo.format(new Date(post?.createdAt))} </span>
           </div>
           <div className="postTopRight">
             <MoreVert/>

@@ -3,6 +3,7 @@ import Topbar from '../../components/Topbar/Topbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Feed from '../../components/Feed/Feed';
 import Rightbar from '../../components/Rightbar/Rightbar';
+import { NO_AVATAR_PIC, NO_COVER_PIC} from '../../constants'
 import './profile.css';
 import axios from "axios";
 import { useEffect } from 'react';
@@ -15,7 +16,6 @@ const Profile = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            console.log('~~~~~~~~~~>',userName)
             try{
                 const res = await axios('/users?username='+userName)
                 setUser(res.data)
@@ -25,8 +25,6 @@ const Profile = () => {
         };
         fetchUser();
     }, [userName]);
-
-    console.log('I am fetched user ', user)
 
     return (
         <>
@@ -41,7 +39,7 @@ const Profile = () => {
                             src={
                                user?.coverPicture
                                 ? PF + user?.coverPicture
-                                : PF + "person/4.jpeg"
+                                : PF + NO_COVER_PIC
                             }
                             alt=""
                         />
@@ -50,7 +48,7 @@ const Profile = () => {
                             src={
                               user?.profilePicture
                                 ? PF + user?.profilePicture
-                                : PF + "person/5.jpeg"
+                                : PF + NO_AVATAR_PIC
                             }
                         />
                     </div>

@@ -4,7 +4,6 @@ const UserModel = require("../models/User");
 
 // CREATE POST
 router.post("/", async (req, res) => {
-    console.log('POSTING:', req.body)
     const newPost = new Post(req.body);
     try{
         const savedPost = await newPost.save();
@@ -17,8 +16,8 @@ router.post("/", async (req, res) => {
 // UPDATE POST
 router.put("/:id", async (req, res) => {
     try{
-        const post = await Post.findById(req.params.id)
-        if(post.userId === req.body.userId) {
+        const post = await Post?.findById(req.params.id)
+        if(post.userId === req?.body?.userId) {
             await post.updateOne({ $set: req.body });
             res.status(200).json("The post has been updated");
         } else {
@@ -85,16 +84,14 @@ router.get("/timeline/:userId", async(req, res) => {
         );
         res.json(userPosts.concat(...friendPosts));
     } catch (err) {
-        res.status(500).json('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`',err)
+        res.status(500).json(err);
     }
 });
 
 // get users post
 router.get("/profile/:username", async (req, res) => {
-    // console.log('~~~~~~~~~~~`> FEED', req);
     try {
       const user = await UserModel.findOne({ username: req.params.username });
-    //   console.log('got the user ~~~~~~~~~~',user);
       const posts = await Post.find({ userId: user._id });
       res.status(200).json(posts);
     } catch (err) {

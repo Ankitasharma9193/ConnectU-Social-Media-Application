@@ -23,10 +23,14 @@ const Login = () => {
       navigate("/");
     }
 
-    console.log('~~~~~~~~~~~~~~`USER:',user)
     return (
      <div className="login">
       <div className="loginContainer">
+        <div className="loginLeft">
+          <div className="loginNote">
+            Welcome to ConnectU
+          </div>
+        </div>
         <div className="loginRight">
           <form className="loginForm" onSubmit={handleOnSubmit}>
             <input 
@@ -47,15 +51,11 @@ const Login = () => {
             <button className="loginButton"
               type="submit"
               disabled={isFetching}>
-              
                   "Log In"
-                
               </button>
             <span className="loginForgot">Forgot Password?</span>
             <button className="loginRegisterButton">
-              
                   "Create a New Account"
-                
             </button>
           </form>
        </div>
