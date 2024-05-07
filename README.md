@@ -171,6 +171,23 @@ Backend API
          
           Response: Returns success message upon deletion.
    
+    Like/Dislike Post Route
+   
+          Endpoint: /posts/:id/like
+   
+          Method: PUT
+   
+          Description: Allows a user to like or dislike a post.
+   
+          Request Body:
+   
+          userId: ID of the user performing the like/dislike action.
+   
+          Response:
+          If the post is liked, returns a message confirming the like action.
+          If the post is disliked (user already liked it), returns a message confirming the dislike action.
+          If an error occurs, returns a 500 Internal Server Error.
+   
       Get Timeline
    
           Description: Retrieve posts for the user's timeline.
@@ -191,7 +208,7 @@ Backend API
          
           Response: Returns posts associated with the specified user's profile.
    
-3) Auth API
+4) Auth API
        
         User Login
    
@@ -217,7 +234,7 @@ Backend API
        
           Response: Returns success message upon successful registration.
    
-  4) Post/Upload API
+  5) Post/Upload API
        
         Post Image with Description
   
