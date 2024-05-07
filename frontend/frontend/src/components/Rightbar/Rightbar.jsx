@@ -8,13 +8,27 @@ import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
 
 function Rightbar({ user }) {
+  console.log('in the right bar', user)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
+  console.log('CURRENT USER:', currentUser);
   const [followed, setFollowed] = useState(
     // is the user in the following list of current user(user in the context API)?
-    currentUser.followings.includes(user?.id)
+    currentUser.followings.includes(user?._id)
   );
+  console.log('FOLLOWED:', followed);
+  // useEffect(() => {
+  //   const getUserFriend = async () => {
+  //     try {
+  //       const friendList = axios.get("users/friends/"+ user?._id)
+  //       setFriends(friendList.data);
+  //     } catch (err) {
+  //       console.log('Error while fetching friends.....',err);
+  //     }
+  //   }
+  //   getUserFriend();
+  // }, [user]);
   
   const handleClick = async () => {
     try {
@@ -35,18 +49,6 @@ function Rightbar({ user }) {
     }
   };
 
-  useEffect(() => {
-    const getUserFriend = async () => {
-      try {
-        const friendList = axios.get("users/friends/"+ user?._id)
-        setFriends(friendList.data);
-      } catch (err) {
-        console.log('Error while fetching friends.....',err);
-      }
-    }
-    getUserFriend();
-  }, [user])
-  console.log('!!!!!!!!!!!!!!!!', friends);
   const HomeRightBar = () => {
     return (
       <div>
@@ -57,14 +59,14 @@ function Rightbar({ user }) {
           </span>
         </div>
         <hr className="rightBarHr" />
-        <div className='title'>
+        {/* <div className='title'>
           <span className="titleText">Online </span>
-        </div>
-        <ul className='friendListOnline'>
+        </div> */}
+        {/* <ul className='friendListOnline'>
             {friends.map((friend) => (
               <Online friend= {friend}/>
             ))}
-        </ul>
+        </ul> */}
       </div>
     )
   };
@@ -83,21 +85,21 @@ function Rightbar({ user }) {
         <div className='rightBarInfo'>
           <div className='infoItem'> 
             <span className='infoKey'>Current City: </span>
-            <span className='infoItem'>Vancouver </span>
+            <span className='infoItem'>{user?.city} </span>
           </div>
 
           <div className='infoItem'> 
             <span className='infoKey'>From: </span>
-            <span className='infoItem'>Madrid </span>
+            <span className='infoItem'>{user?.from} </span>
           </div>
 
           <div className='infoItem'> 
             <span className='infoKey'>Birthday: </span>
-            <span className='infoItem'>26th April </span>
+            <span className='infoItem'>{user?.birth} </span>
           </div>
         </div>
-        <h4 className='titleText'>User Friends</h4>
-        <div className='profileBarFollowings'>
+        {/* <h4 className='titleText'>User Friends</h4> */}
+        {/* <div className='profileBarFollowings'>
           {friends.map((friend) => {
             <Link
               to={"/profile/" + friend.username}
@@ -118,7 +120,7 @@ function Rightbar({ user }) {
             </Link>
 
           })}
-        </div>
+        </div> */}
       </>
     )
   };

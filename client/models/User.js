@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
       max: 50,
       unique: true,
     },
@@ -51,6 +50,10 @@ const UserSchema = new mongoose.Schema(
     from: {
       type: String,
       max: 50,
+    },
+    birth: {
+      type: String,
+      default: "",
     },
     relationship: {
       type: Number,

@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 router.put("/:id", async (req, res) => {
     if(req.body.userId === req.params.id || req.user.isAdmin){
         if(req.body.password){
-            console.log('~~~~~',req.body.password)
             try{
                 req.body.password = await bcrypt.hash(req.body.password, salt);
             } catch(err) {
@@ -42,18 +41,14 @@ router.delete("/:id", async (req, res) => {
 
 // GET USER ACCOUNT
 router.get("/", async (req, res) => {
-//    console.log('in req object',req)
+    // console.log('in req object',req)
     const userName = req.query.username;
     const userId = req.query.userId;
-
-    console.log('in the get user', userName, userId)
     try{
         const user = userId
          ? await UserModel.findById(userId)
          : await UserModel.findOne({ username: userName });
-        console.log('~~~~~~~~>user data',user);
         const { password, updatedAt, ...other } = user._doc;
-        console.log('~~~~~~~~~~~~~~~',other)
         res.status(200).json(other);
     } catch (err) {
         return res.status(500).json(err)
@@ -64,7 +59,7 @@ router.get("/", async (req, res) => {
 
 // GET ALL FRIENDS OF USER
 router.get("/friends/:userId", async (req, res) => {
-    console.log('friend list~~~~', req.params.userId);
+    // console.log('friend list~~~~', req);
     try {
       const user = await UserModel.findById(req.params.userId);
       const friends = await Promise.all(
@@ -72,6 +67,7 @@ router.get("/friends/:userId", async (req, res) => {
           return UserModel.findById(friendId);
         })
       );
+      console.log('FRIEND LIST ~~~~~~~~~`', friends.length)
       let friendList = [];
       friends.map((friend) => {
         const { _id, username, profilePicture } = friend;
@@ -85,7 +81,7 @@ router.get("/friends/:userId", async (req, res) => {
 
 // FOLLOW USER
 router.put("/:id/follow", async (req, res) => {
-    if(req.body.userId !== req.params.id || req.body.isAdmin){
+    if(req.body.userId !== req.params.id ){
         const userToFollow = req.params.id
         const userWantToFollow = req.body.userId
         try {
@@ -96,6 +92,7 @@ router.put("/:id/follow", async (req, res) => {
                 await currentUser.updateOne({$push: {followings: userToFollow} });
                 res.status(200).json(`You are now following ${user?.username}`);
             } else {
+                console.log('i have issue')
                 res.status(403).json("You already follow this user");
             }
         } catch(err) {
@@ -108,6 +105,7 @@ router.put("/:id/follow", async (req, res) => {
 
 //UNFOLLOW USER
 router.put(":id/unfollow", async (req, res) => {
+    // console.log('~~~~~~~~~~`> if to unfollow', req.params.id, req.body.userId);
     if(req.body.userId !== req.params.id) {
         const userToFollow = req.params.id
         const userWantToFollow = req.body.userId

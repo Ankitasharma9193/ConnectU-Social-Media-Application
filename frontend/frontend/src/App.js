@@ -23,8 +23,10 @@ function App() {
 
         <Route path="/profile/:userName" element={<Profile />} />
 
-        <Route path="/login" element={
-          user ? <Navigate to="/" /> : <Login />} />
+        {/* <Route path="/login" element={
+          user ? <Navigate to="/" /> : <Login />} /> */}
+
+        <Route path="/login" element={ <Login />} />
 
         <Route path="/register" element={<Register />} />
       </Routes>

@@ -4,6 +4,7 @@ const UserModel = require("../models/User");
 
 // CREATE POST
 router.post("/", async (req, res) => {
+    console.log('POSTING:', req.body)
     const newPost = new Post(req.body);
     try{
         const savedPost = await newPost.save();
@@ -74,7 +75,6 @@ router.get("/:id", async (req, res) => {
 
 //TIMELINE POSTS
 router.get("/timeline/:userId", async(req, res) => {
-    console.log('I am here !!!!!!!!!!!!!!!!!!!!!!!!!!!')
     try {
         const currentUser = await UserModel.findById(req.params.userId);
         const userPosts = await Post.find({ userId: currentUser._id });
@@ -88,5 +88,18 @@ router.get("/timeline/:userId", async(req, res) => {
         res.status(500).json('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`',err)
     }
 });
+
+// get users post
+router.get("/profile/:username", async (req, res) => {
+    // console.log('~~~~~~~~~~~`> FEED', req);
+    try {
+      const user = await UserModel.findOne({ username: req.params.username });
+    //   console.log('got the user ~~~~~~~~~~',user);
+      const posts = await Post.find({ userId: user._id });
+      res.status(200).json(posts);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 module.exports = router;

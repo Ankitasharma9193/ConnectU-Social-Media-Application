@@ -2,8 +2,10 @@ import "./login.css";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../apiCalls";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const email = useRef();
     const password = useRef();
     const { user, isFetching, error, dispatch } = useContext(AuthContext);
@@ -15,7 +17,13 @@ const Login = () => {
         password: password.current.value}, 
         dispatch
       );
+    };
+
+    if(user && !isFetching && !error) {
+      console.log('let le goooooooooooooo')
+      navigate("/");
     }
+
     console.log('~~~~~~~~~~~~~~`USER:',user)
     return (
      <div className="login">

@@ -16,17 +16,26 @@ const Profile = () => {
     useEffect(() => {
         const fetchUser = async () => {
             console.log('~~~~~~~~~~>',userName)
-
-            await axios('/users?username='+userName)
-            .then((res) => {
+            try{
+                const res = await axios('/users?username='+userName)
                 setUser(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            } catch(err) {
+                    console.log(err)
+                }
+            // .then((res) => {
+            //     setUser(res.data)
+            //     console.log('I am user setting in state ', user)
+            // })
+            // .catch((err) => {
+            //     console.log(err)
+            // })
         };
         fetchUser();
+        console.log('I am fetched user ', user)
+
     }, [userName]);
+
+    console.log('I am fetched user ', user)
 
     return (
         <>
@@ -41,7 +50,7 @@ const Profile = () => {
                             src={
                                user?.coverPicture
                                 ? PF + user?.coverPicture
-                                : PF + "person/4.png"
+                                : PF + "person/4.jpeg"
                             }
                             alt=""
                         />
@@ -50,7 +59,7 @@ const Profile = () => {
                             src={
                               user?.profilePicture
                                 ? PF + user?.profilePicture
-                                : PF + "person/noAvatar.png"
+                                : PF + "person/5.jpeg"
                             }
                         />
                     </div>
@@ -65,8 +74,8 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="profileRightBottom">
-                    {/* <Feed username={userName}/>
-                    <Rightbar user={user} /> */}
+                    <Feed username={userName}/>
+                    <Rightbar user={user} />
                 </div>
             </div>
             
