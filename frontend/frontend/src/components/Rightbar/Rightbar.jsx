@@ -13,10 +13,13 @@ function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   console.log('CURRENT USER:', currentUser);
-  const [followed, setFollowed] = useState(
-    // is the user in the following list of current user(user in the context API)?
-    currentUser.followings.includes(user?._id)
-  );
+  const [followed, setFollowed] = useState(false);
+
+  useEffect(() => {
+    const followInitial = currentUser.followings.includes(user?._id)
+    setFollowed(followInitial)
+  })
+
   console.log('FOLLOWED:', followed);
   // useEffect(() => {
   //   const getUserFriend = async () => {
@@ -33,6 +36,7 @@ function Rightbar({ user }) {
   const handleClick = async () => {
     try {
       if (followed) {
+        console.log('going to unfollow')
         await axios.put(`/users/${user._id}/unfollow`, {
           userId: currentUser._id
       });

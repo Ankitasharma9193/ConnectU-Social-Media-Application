@@ -20,7 +20,6 @@ const Login = () => {
     };
 
     if(user && !isFetching && !error) {
-      console.log('let le goooooooooooooo')
       navigate("/");
     }
 

@@ -22,17 +22,8 @@ const Profile = () => {
             } catch(err) {
                     console.log(err)
                 }
-            // .then((res) => {
-            //     setUser(res.data)
-            //     console.log('I am user setting in state ', user)
-            // })
-            // .catch((err) => {
-            //     console.log(err)
-            // })
         };
         fetchUser();
-        console.log('I am fetched user ', user)
-
     }, [userName]);
 
     console.log('I am fetched user ', user)
