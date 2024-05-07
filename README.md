@@ -232,22 +232,27 @@ Database Model
    
         timestamps: Automatic inclusion of createdAt and updatedAt timestamps for user creation and updates respectively, facilitated by setting { timestamps: true } option in the schema.
    
-3) Post
+2) Post
     
-    Description: The Post model represents individual posts created by users within the system. Each post contains content such as text, images, or multimedia along with metadata like creation timestamp, author (user who created the post), and any additional details.Attributes:
+     Description
    
-    id: Unique identifier for each post.
-   
-    desc: Textual content of the post.
-   
-    image_url: URL of any associated image with the post.
-   
-    created_at: Timestamp indicating when the post was created.
-   
-    user_id: Foreign key referencing the user who created the post.
-   
-    Additional attributes: Any other relevant metadata associated with the post like likes, comments, etc.
+        The Post model defines the structure and attributes of posts created by users within the system. It captures various aspects of each post, including the content, associated user details, and social interactions such as likes.
 
+    Attributes
+   
+        userId: Unique identifier of the user who created the post, required for association.
+   
+        userName: Username of the user who created the post.
+   
+        desc: Textual description or content of the post, constrained to a maximum length of 500 characters.
+   
+        img: URL of any image associated with the post.
+   
+        likes: Array containing IDs of users who have liked the post, defaults to an empty array.
+   
+        Additional Information
+   
+        timestamps: Automatic inclusion of createdAt and updatedAt timestamps for post creation and updates respectively, facilitated by setting { timestamps: true } option in the schema.
 
 
     
