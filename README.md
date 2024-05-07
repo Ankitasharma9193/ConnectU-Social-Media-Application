@@ -18,13 +18,13 @@ Installation:
 
     There will be 2 folders
     
-   1) client - backend - Node, Express, MongoDb
+   1) backend - Node, Express, MongoDb
    2) frontend - React, Javascript
 
 How to run:
 
 1) Frontend- Go to frontend -> frontend -> npm start
-2) Backend- Go to client -> npm start
+2) Backend- Go to backend -> npm start
    
 Application runs at - (http://localhost:3000)
 
