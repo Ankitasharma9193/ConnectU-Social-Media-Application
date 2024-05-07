@@ -2,7 +2,7 @@ Social Networking site application - ConnectU
 
 This is a Full Stack web application built using React for the frontend and Express, MongoDb for the backend.
 
-I have used Context API, React Hooks, Material UI
+I have used Context API, React Hooks, Material UI in frontend and axios in backend as external npm packages
 
 Getting Started:
 
