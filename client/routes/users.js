@@ -59,22 +59,23 @@ router.get("/", async (req, res) => {
 
 // GET ALL FRIENDS OF USER
 router.get("/friends/:userId", async (req, res) => {
-    console.log('friend list~~~~', req);
     try {
-      const user = await UserModel.findById(req.params.userId);
-      const friends = await Promise.all(
-        user.followings.map((friendId) => {
-          return UserModel.findById(friendId);
-        })
-      );
-      let friendList = [];
-      friends.map((friend) => {
-        // console.log('I am your friend dear!',friend);
-        const { username, profilePicture } = friend;
-        friendList.push({ username, profilePicture });
-        });
-        console.log('FRIEND LIST ~~~~~~~~~`', friends.length)
-        res.status(200).json(friendList)
+     if(req?.params?.userId !== "undefined"){
+        const user = await UserModel.findById(req?.params?.userId);
+        const friends = await Promise.all(
+            user.followings.map((friendId) => {
+            return UserModel.findById(friendId);
+            })
+        );
+        let friendList = [];
+        friends.map((friend) => {
+            const { username, profilePicture } = friend;
+            friendList.push({ username, profilePicture });
+            });
+            console.log('~~~~~~~~~~~ friend list array', friendList)
+
+            res.status(200).json(friendList)
+     }
     } catch (err) {
       res.status(500).json(err);
     }

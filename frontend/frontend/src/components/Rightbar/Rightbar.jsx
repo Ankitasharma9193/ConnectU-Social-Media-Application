@@ -21,17 +21,19 @@ function Rightbar({ user }) {
   })
 
   console.log('FOLLOWED:', followed);
-  // useEffect(() => {
-  //   const getUserFriend = async () => {
-  //     try {
-  //       const friendList = axios.get("/users/friends/"+ user?._id)
-  //       setFriends(friendList.data);
-  //     } catch (err) {
-  //       console.log('Error while fetching friends.....',err);
-  //     }
-  //   }
-  //   getUserFriend();
-  // }, [user]);
+  useEffect(() => {
+    const getUserFriend = async () => {
+      try {
+        const friendList = await axios.get("/users/friends/"+ user?._id)
+        setFriends(friendList.data);
+        console.log('all the friends in front end', friendList.data)
+
+      } catch (err) {
+        console.log('Error while fetching friends.....',err);
+      }
+    }
+    getUserFriend();
+  }, [user]);
   
   const handleClick = async () => {
     try {
@@ -63,14 +65,14 @@ function Rightbar({ user }) {
           </span>
         </div>
         <hr className="rightBarHr" />
-        {/* <div className='title'>
+        <div className='title'>
           <span className="titleText">Online </span>
-        </div> */}
-        {/* <ul className='friendListOnline'>
+        </div>
+         <ul className='friendListOnline'>
             {friends.map((friend) => (
               <Online friend= {friend}/>
             ))}
-        </ul> */}
+        </ul>
       </div>
     )
   };
@@ -102,29 +104,29 @@ function Rightbar({ user }) {
             <span className='infoItem'>{user?.birth} </span>
           </div>
         </div>
-        {/* <h4 className='titleText'>User Friends</h4> */}
-        {/* <div className='profileBarFollowings'>
-          {friends.map((friend) => {
+        <h4 className='titleText'>User Friends</h4>
+        <div className='profileBarFollowings'>
+          {friends.map((friend) => (
             <Link
-              to={"/profile/" + friend.username}
+              to={"profile/" + friend?.username}
               style={{ textDecoration: "none" }}
-            >
+            > 
               <div className="profileBarFollowing">
                 <img
                   className="profileBarFollowingImg"
                   src={
-                    friend.profilePicture
-                      ? PF + friend.profilePicture
+                    friend?.profilePicture
+                      ? PF + friend?.profilePicture
                       : PF + "person/1.png"
                   }
                   alt=""
                 />
                 <span className="profileBarFollowingName">{friend.username}</span>
               </div>
-            </Link>
+           </Link>
 
-          })}
-        </div> */}
+          ))}
+        </div>
       </>
     )
   };
