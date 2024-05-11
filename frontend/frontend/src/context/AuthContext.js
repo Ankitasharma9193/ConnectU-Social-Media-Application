@@ -1,13 +1,18 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, 
+  useEffect, 
+  useReducer,
+  useState,
+  useMemo } from "react";
+import axios from "axios";
 import AuthReducer from "./AuthReducer";
 
 const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem("user")) || null,
+    user: JSON.parse(localStorage.getItem("user")),
     isFetching: false,
     error:false
 };
 
-export const AuthContext =  createContext(INITIAL_STATE); //hook
+export const AuthContext =  createContext(INITIAL_STATE);
 
 export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);

@@ -8,7 +8,7 @@ const Register = () => {
    const email = useRef();
    const password = useRef();
    const passwordAgain = useRef();
-   const navigate = useNavigate();
+   const Navigate = useNavigate();
    
    const handleOnSubmit = async (e) => {
      e.preventDefault();
@@ -22,7 +22,7 @@ const Register = () => {
         };
         try {
           await axios.post("/auth/register", user);
-          navigate("/login");
+          Navigate("/login");
         } catch (err) {
           console.log(err);
         }
@@ -59,7 +59,7 @@ const Register = () => {
                         minLength="6" 
                     />
                     <button className="signUpButton">Sign Up</button>
-                    <button className="loginRegisterButton">
+                    <button onClick= {() => Navigate("/login")} className="loginRegisterButton">
                         Log into Account
                     </button>
                 </form>

@@ -3,12 +3,19 @@ import { Search, Person, Chat, Notifications } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { NO_AVATAR_PIC } from "../../constants";
+// import { NO_AVATAR_PIC } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
+  const Navigate = useNavigate();
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    Navigate("login")
+  }
   return (
     <div  className="topbarContainer">
         <div className="topbarLeft"> 
@@ -23,6 +30,7 @@ export default function Topbar() {
                 <input 
                     placeholder="Search for friend, post or video" 
                     className="searchInput" 
+                
                 />
             </div>
         </div>
@@ -31,6 +39,9 @@ export default function Topbar() {
             <div className="topbarLinks">
                 <span className="topbarLink">Homepage</span>
                 <span className="topbarLink">Timeline</span>
+            </div>
+            <div>
+                <button onClick={handleLogout} className="logout-button">LogOut</button>
             </div>
             <div className="topbarIcons">
                 <div className="topbarIconItem">
@@ -48,9 +59,7 @@ export default function Topbar() {
                 <Link to={`/profile/${user.username}`}>
                     <img
                         src={
-                        user.profilePicture
-                            ? PF + user.profilePicture
-                            : PF + NO_AVATAR_PIC
+                            user?.profilePicture
                         }
                         alt=""
                         className="topbarImg"

@@ -104,7 +104,7 @@ function Rightbar({ user }) {
         <div className='profileBarFollowings'>
           {friends.map((friend) => (
             <Link
-              to={"profile/" + friend?.username}
+              to={"/profile/" + friend?.username}
               style={{ textDecoration: "none" }}
             > 
               <div className="profileBarFollowing">
@@ -112,7 +112,7 @@ function Rightbar({ user }) {
                   className="profileBarFollowingImg"
                   src={
                     friend?.profilePicture
-                      ? PF + friend?.profilePicture
+                      ? friend?.profilePicture
                       : PF + "person/1.png"
                   }
                   alt=""

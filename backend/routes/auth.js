@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const UserModel = require("../models/User")
-const bcrypt = require("bcrypt")
+const UserModel = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 // USER REGISTRATION
 router.post("/register", async (req, res)=> {
@@ -25,6 +26,7 @@ router.post("/register", async (req, res)=> {
   }
 });
 
+const refreshTokens = []
 // USER LOGIN
 router.post("/login", async(req, res) => {
     try{
@@ -36,10 +38,26 @@ router.post("/login", async(req, res) => {
 
         //check if password is valid
         //!validPassword && res.status(400).json("wrong password");
-        res.status(200).json(user);
+        res.status(200).json(user );
+
+        // if(user) {
+        //   //generate access and refresh tokens
+        //   const accessToken = generateAccessToken({user});
+        //   // const refreshToken = generateRefreshToken(user);
+        //   console.log('~~~~~~~TOKEN ACCESS:',accessToken)
+        //   // refreshTokens.push(refreshToken);
+        //   //respond with tokens
+        //   const response = {
+        //     user: user,
+        //     accessToken,
+        //    // refreshToken
+        //   }
+        //   console.log('!! RESPONSE:', response)
+        //   res.status(200).json(user );
+        // }
     } catch(err) {
         res.status(500).json(err)
     }
-})
+});
 
 module.exports = router;

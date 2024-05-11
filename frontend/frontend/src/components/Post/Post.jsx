@@ -6,11 +6,13 @@ import TimeAgo from 'javascript-time-ago';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import en from 'javascript-time-ago/locale/en';
+import { HEART_URL, LIKE_URL } from '../../constants';
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length)
   const [likeStatus, setLikeStatus] = useState(false);
   const [user, setUser] = useState({});
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   
   TimeAgo.addLocale(en);
@@ -50,7 +52,7 @@ export default function Post({ post }) {
               <img  className='profileImg'
                 src= {
                     user?.profilePicture
-                    ? PF + user?.profilePicture
+                    ? user?.profilePicture
                     : PF + "person/1.jpeg"
                 }
                 alt=""
@@ -68,13 +70,13 @@ export default function Post({ post }) {
 
         <div className="postCentre">
           <span className='postCaption'> {post?.desc} </span>
-          <img className='postImg' src= {PF+post?.img} alt="" />
+          <img className='postImg' src= {post?.img} alt="" />
         </div>
 
         <div className="postBottom">
           <div className="postBottomLeft">
-              <img className="likeIcon" src={`${PF}like.png`} onClick={ likeHandler } alt="" />
-              <img className="likeIcon" src={`${PF}heart.png`} onClick={ likeHandler } alt="" />
+              <img className="likeIcon" src={LIKE_URL} onClick={ likeHandler } alt="" />
+              <img className="likeIcon" src={HEART_URL} onClick={ likeHandler } alt="" />
               <span className="likeCount"> {like} people like it</span>
             </div>
             <div className="postBottomRight">

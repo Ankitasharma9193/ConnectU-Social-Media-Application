@@ -32,17 +32,20 @@ export default function Share() {
         data.append("name", fileName);
         // append file to data
         data.append("file", file);
-        // upload image to post
-        newPost.img = fileName
+        // upload image to post database
+        // newPost.img = fileName
         // upload file to server
         try{
-            await axios.post("/upload", data);
+            const fileLocation = await axios.post("/upload", data);
+            console.log('FILELOCATION:::::::::::::::',fileLocation.data.location);
+            newPost.img = fileLocation.data.location
         } catch (err) {
-            console.log('Error while uploading....',err)
+            console.log('Error while uploading....',err);
         }
     }
     // post description/thought to server
     try{
+        console.log('THIS IS NEWPOST::::::::::',newPost)
         await axios.post("/posts", newPost);
         // refresh the page after uploading post
         window.location.reload();
@@ -57,9 +60,7 @@ export default function Share() {
             <div className='shareTop'>
                 <img className='shareProfileImage'
                  src= {
-                    user.profilePicture
-                     ? PF + user?.profilePicture
-                     : PF + NO_AVATAR_PIC
+                    user?.profilePicture
                  }
                  alt='' 
                 />

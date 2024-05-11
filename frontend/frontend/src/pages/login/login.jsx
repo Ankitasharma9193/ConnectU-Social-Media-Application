@@ -1,14 +1,14 @@
 import "./login.css";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../apiCalls";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate();
+    const Navigate = useNavigate();
     const email = useRef();
     const password = useRef();
-    const { user, isFetching, error, dispatch } = useContext(AuthContext);
+    const { user, isFetching, error, dispatch, jwtContextValue  } = useContext(AuthContext);
 
     const handleOnSubmit = (e) => {
       e.preventDefault();
@@ -19,8 +19,8 @@ const Login = () => {
       );
     };
 
-    if(user && !isFetching && !error) {
-      navigate("/");
+    if(user && !isFetching && !error ) {
+      Navigate("/");
     }
 
     return (
@@ -54,7 +54,7 @@ const Login = () => {
                   "Log In"
               </button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
+            <button onClick={() => Navigate("/register")} className="loginRegisterButton">
                   "Create a New Account"
             </button>
           </form>

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const UserModel = require("../models/User");
 const bcrypt = require("bcrypt");
+const { verify } = require("../jwtVerification");
 
 // UPDATE USER ACCOUNT
 router.put("/:id", async (req, res) => {
@@ -26,7 +27,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE USER ACCOUNT
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verify, async (req, res) => {
     if(req.body.userId === req.params.id || req.body.isAdmin){
         try {
             await UserModel.findByIdAndDelete()

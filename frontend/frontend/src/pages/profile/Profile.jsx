@@ -3,7 +3,6 @@ import Topbar from '../../components/Topbar/Topbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Feed from '../../components/Feed/Feed';
 import Rightbar from '../../components/Rightbar/Rightbar';
-import { NO_AVATAR_PIC, NO_COVER_PIC} from '../../constants'
 import './profile.css';
 import axios from "axios";
 import { useEffect } from 'react';
@@ -38,8 +37,6 @@ const Profile = () => {
                             className="profileCoverImg"
                             src={
                                user?.coverPicture
-                                ? PF + user?.coverPicture
-                                : PF + NO_COVER_PIC
                             }
                             alt=""
                         />
@@ -47,15 +44,13 @@ const Profile = () => {
                             className="profileUserImg"
                             src={
                               user?.profilePicture
-                                ? PF + user?.profilePicture
-                                : PF + NO_AVATAR_PIC
                             }
                         />
                     </div>
 
                     <div className="profileInfo">
                         <h4 className="profileInfoName">
-                            {user?.username}
+                            {user?.username?.toUpperCase()}
                         </h4>
                         <span className="profileInfoDesc">
                             {user?.desc}
